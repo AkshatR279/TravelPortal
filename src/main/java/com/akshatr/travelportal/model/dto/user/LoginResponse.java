@@ -16,7 +16,7 @@ public class LoginResponse {
     private UserLoginDetails login;
 
     public LoginResponse(User user, LoginDetails loginDetails){
-        this.user = new UserDetails();
+        this.user = new UserDetails(user);
         this.login = new UserLoginDetails(loginDetails);
     }
 }

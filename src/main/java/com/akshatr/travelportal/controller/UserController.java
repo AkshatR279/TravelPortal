@@ -30,4 +30,9 @@ public class UserController {
                 .map(UserDetails::new)
                 .toList();
     }
+
+    @DeleteMapping("/{uuid}")
+    public void delete(@PathVariable String uuid){
+        userService.delete(uuid);
+    }
 }

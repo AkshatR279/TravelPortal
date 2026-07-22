@@ -1,19 +1,13 @@
 package com.akshatr.travelportal.service.impl;
 
 import com.akshatr.travelportal.exception.EntityNotFoundException;
-import com.akshatr.travelportal.model.dto.user.LoginRequest;
-import com.akshatr.travelportal.model.dto.user.LoginResponse;
 import com.akshatr.travelportal.model.dto.user.UserUpdateRequest;
 import com.akshatr.travelportal.model.entity.User;
 import com.akshatr.travelportal.repository.UserRepository;
 import com.akshatr.travelportal.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,6 +25,7 @@ public class UserServiceImpl implements UserService {
                     .orElseThrow(() -> new EntityNotFoundException("User not found for the provided UUID."));
         }
         else{
+            user.setUsername(request.getUsername());
             user.setUuid(UUID.randomUUID());
             user.setEmail(request.getEmail());
             user.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -53,5 +48,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> listUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public void delete(String uuid) {
+        User user = userRepository.findByUuid(UUID.fromString(uuid))
+                .orElseThrow(() -> new EntityNotFoundException("User not found for the provided UUID."));
+
+        userRepository.delete(user);
     }
 }
