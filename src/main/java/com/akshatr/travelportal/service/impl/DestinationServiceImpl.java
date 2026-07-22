@@ -29,6 +29,7 @@ public class DestinationServiceImpl implements DestinationService {
         }
 
         destination.setName(request.getName());
+        destination.setCode(request.getCode());
 
         return destinationRepository.save(destination);
     }

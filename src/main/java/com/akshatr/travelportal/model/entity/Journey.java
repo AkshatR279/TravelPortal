@@ -22,6 +22,9 @@ public class Journey {
     @Column(nullable = false, unique = true, updatable = false)
     private UUID uuid;
 
+    @Column(nullable = false, unique = true)
+    private String code;
+
     private String name;
 
     @CreationTimestamp
@@ -43,4 +46,7 @@ public class Journey {
             inverseJoinColumns = @JoinColumn(name = "destination_id")
     )
     private List<Destination> destinations;
+
+    @OneToMany(mappedBy = "journey")
+    private List<Ticket> tickets;
 }

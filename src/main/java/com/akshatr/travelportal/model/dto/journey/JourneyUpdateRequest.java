@@ -6,6 +6,7 @@ import lombok.Getter;
 public class JourneyUpdateRequest {
     private String action;
     private String uuid;
+    private String code;
     private String name;
     private String companyUuid;
 }

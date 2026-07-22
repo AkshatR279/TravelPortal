@@ -15,12 +15,14 @@ import java.util.UUID;
 @AllArgsConstructor
 public class JourneyDetails {
     private UUID uuid;
+    private String code;
     private String name;
     private Boolean active;
     private CompanyDetails company;
 
     public JourneyDetails(Journey journey){
         this.uuid = journey.getUuid();
+        this.code = journey.getCode();
         this.name = journey.getName();
         this.active = journey.getActive();
         this.company = new CompanyDetails(journey.getCompany());

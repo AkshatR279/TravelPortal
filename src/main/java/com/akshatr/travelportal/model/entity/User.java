@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -34,4 +35,7 @@ public class User {
     private Timestamp modifyDate;
 
     private Boolean active;
+
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> tickets;
 }

@@ -35,6 +35,7 @@ public class JourneyServiceImpl implements JourneyService {
         }
 
         journey.setName(request.getName());
+        journey.setCode(request.getCode());
         journey.setCompany(company);
 
         return journeyRepository.save(journey);

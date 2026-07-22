@@ -6,5 +6,6 @@ import lombok.Getter;
 public class DestinationUpdateRequest {
     private String action;
     private String uuid;
+    private String code;
     private String name;
 }

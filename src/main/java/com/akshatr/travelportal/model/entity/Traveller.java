@@ -1,5 +1,6 @@
 package com.akshatr.travelportal.model.entity;
 
+import com.akshatr.travelportal.model.enums.Gender;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,10 +12,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tbl_Destination")
+@Table(name = "tbl_Traveller")
 @Getter
 @Setter
-public class Destination {
+public class Traveller {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,10 +23,11 @@ public class Destination {
     @Column(nullable = false, unique = true, updatable = false)
     private UUID uuid;
 
-    @Column(nullable = false, unique = true)
-    private String code;
-
     private String name;
+    private int age;
+
+    @Enumerated(value = EnumType.STRING)
+    private Gender gender;
 
     @CreationTimestamp
     private Timestamp createDate;
@@ -35,6 +37,10 @@ public class Destination {
 
     private Boolean active;
 
-    @ManyToMany(mappedBy = "destinations")
-    private List<Journey> journeys;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany(mappedBy = "travellers")
+    private List<Ticket> tickets;
 }

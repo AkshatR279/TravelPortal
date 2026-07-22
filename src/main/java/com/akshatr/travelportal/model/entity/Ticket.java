@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tbl_Destination")
+@Table(name = "tbl_Ticket")
 @Getter
 @Setter
-public class Destination {
+public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,6 +35,19 @@ public class Destination {
 
     private Boolean active;
 
-    @ManyToMany(mappedBy = "destinations")
-    private List<Journey> journeys;
+    @ManyToOne
+    @JoinColumn(name = "journey_id")
+    private Journey journey;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tbl_Ticket_Travellers",
+            joinColumns = @JoinColumn(name = "ticket_id"),
+            inverseJoinColumns = @JoinColumn(name = "traveller_id")
+    )
+    private List<Traveller> travellers;
 }
