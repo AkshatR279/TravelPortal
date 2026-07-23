@@ -3,10 +3,11 @@ package com.akshatr.travelportal.service.impl;
 import com.akshatr.travelportal.exception.EntityNotFoundException;
 import com.akshatr.travelportal.model.dto.journey.JourneyUpdateRequest;
 import com.akshatr.travelportal.model.entity.Company;
-import com.akshatr.travelportal.model.entity.Destination;
 import com.akshatr.travelportal.model.entity.Journey;
 import com.akshatr.travelportal.repository.CompanyRepository;
+import com.akshatr.travelportal.repository.JourneyDestinationRepository;
 import com.akshatr.travelportal.repository.JourneyRepository;
+import com.akshatr.travelportal.service.JourneyDestinationService;
 import com.akshatr.travelportal.service.JourneyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,9 +17,9 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class JourneyServiceImpl implements JourneyService {
+public class JourneyDestinationServiceImpl implements JourneyDestinationService {
+    private final JourneyDestinationRepository journeyDestinationRepository;
     private final JourneyRepository journeyRepository;
-    private final CompanyRepository companyRepository;
 
     @Override
     public Journey update(JourneyUpdateRequest request) {

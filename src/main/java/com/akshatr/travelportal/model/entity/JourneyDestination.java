@@ -7,23 +7,19 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tbl_Destination")
+@Table(name = "tbl_Journey_Destination")
 @Getter
 @Setter
-public class Destination {
+public class JourneyDestination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true, updatable = false)
+    @Column(unique = true, nullable = false, updatable = false)
     private UUID uuid;
-
-    @Column(nullable = false, unique = true)
-    private String code;
 
     private String name;
 
@@ -35,6 +31,14 @@ public class Destination {
 
     private Boolean active;
 
-    @OneToMany(mappedBy = "destination")
-    private List<JourneyDestination> journeys;
+    @ManyToOne
+    @JoinColumn(name = "journey_id")
+    private Journey journey;
+
+    @ManyToOne
+    @JoinColumn(name = "destination_id")
+    private Destination destination;
+
+    @Column(nullable = false)
+    private Integer sequence;
 }

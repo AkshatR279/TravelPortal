@@ -39,13 +39,8 @@ public class Journey {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @ManyToMany
-    @JoinTable(
-            name = "tbl_Journey_Destination",
-            joinColumns = @JoinColumn(name = "journey_id"),
-            inverseJoinColumns = @JoinColumn(name = "destination_id")
-    )
-    private List<Destination> destinations;
+    @OneToMany(mappedBy = "journey")
+    private List<JourneyDestination> destinations;
 
     @OneToMany(mappedBy = "journey")
     private List<Ticket> tickets;
