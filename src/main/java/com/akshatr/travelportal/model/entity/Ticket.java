@@ -50,4 +50,8 @@ public class Ticket {
             inverseJoinColumns = @JoinColumn(name = "traveller_id")
     )
     private List<Traveller> travellers;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
 }

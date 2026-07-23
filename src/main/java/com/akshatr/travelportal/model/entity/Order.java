@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.UUID;
 
 @Entity
-@Table(name = "tbl_User")
+@Table(name = "tbl_Order")
 @Getter
 @Setter
-public class User {
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,11 +22,10 @@ public class User {
     @Column(nullable = false, unique = true, updatable = false)
     private UUID uuid;
 
-    private String username;
-    private String password;
+    @Column(nullable = false, unique = true)
+    private String code;
+
     private String name;
-    private String mobile;
-    private String email;
 
     @CreationTimestamp
     private Timestamp createDate;
@@ -36,12 +35,13 @@ public class User {
 
     private Boolean active;
 
-    @OneToMany(mappedBy = "user")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(mappedBy = "order")
     private List<Ticket> tickets;
 
-    @OneToMany(mappedBy = "user")
-    private List<Order> orders;
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "order")
     private List<Payment> payments;
 }
